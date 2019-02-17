@@ -76,14 +76,14 @@ function getAccounts(masterPassword){
 
     if(typeof encryptedAccounts !== 'undefined'){
     var decryptedAccounts = crypto.AES.decrypt(encryptedAccounts,masterPassword);
-    accounts = JSON.parse(decryptedAccounts.toString(crypto.enc.Utf8));
+    accounts = decryptedAccounts;
     }
     return accounts;
 }
 
 function saveAccounts(accounts, masterPassword){
     var encryptAccounts = crypto.AES.encrypt(JSON.stringify(accounts),masterPassword);
-    storage.setItemSync('accounts',encryptAccounts.toString());
+    storage.setItemSync('accounts', encryptAccounts.toString());
     return accounts;
 }
 
@@ -117,6 +117,8 @@ if(command === 'create'){
     console.log(createdAccount);
 }catch (e){
     console.log("Unable to create account!");
+    console.log("ERROR: " + e);
+    console.log(e.stack);
 }
 }else if(command === 'get'){
     try{
