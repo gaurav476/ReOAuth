@@ -1,0 +1,21 @@
+{
+  "name": "drive",
+  "version": "1.0.0",
+  "description": "app to test drive api",
+  "main": "gdriveModule.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shivam Gangwar",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "crypto-js": "^3.1.5",
+    "fs": "0.0.1-security",
+    "googleapis": "^27.0.0",
+    "node-persist": "0.0.6",
+    "readline": "^1.3.0",
+    "sha1": "^1.1.1",
+    "yargs": "^3.15.0"
+  }
+}
