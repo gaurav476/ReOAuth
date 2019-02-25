@@ -10,17 +10,21 @@ function client_connection(pin_from_client){
   //     console.log(connected)})
 
   //send pin for verification
-  socket.emit('connect', pin_from_client)
+  console.log(pin_from_client)
+  socket.emit('connected', pin_from_client);
   socket.emit('recieve_message')
 
   socket.on('send_file', function(data){
     console.log(data);  //next save it on the local device
     //fileWriter(data); //data in dictionary format
+    if(data){
+      socket.disconnect();
+    }
   });
 }
 
 module.exports = {client_connection};
-client_connection(9319);
+client_connection(07973849);
 
 // 'use strict';
 // function get_ip()
