@@ -45,13 +45,13 @@ module.exports.AssetManager = class AssetManager {
         //     .assetModel
         //     .retrieve(this.userDID.id);
         let retrieveAssets = await this.userDID.models[this.assetType].retrieve();
-        return retrieveAssets;
+        return retrieveAssets[retrieveAssets.length-1].data.ids;
     }
 
     // async retrieveAssets() {
     //     let retrievedAssets = await Orm._connection.searchAssets(ID.phrase);
     //     return retrievedAssets;
-    // } 
+    // }
 
     async updateAsset(updatedData) {
         let retrievedAssets = await this.retrieveAssets();
