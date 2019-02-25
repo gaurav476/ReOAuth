@@ -54,15 +54,17 @@ async function writer_username(domain, username, password){
 
         obj = JSON.parse(data); //now it an object
         for(x in obj) {console.log(obj[x]) ; keys.push(obj[x]);}
-        obj[username] = random(0,10); //add some data
-        user_key = obj[username];
+        
+        //obj[username] = random(0,10); //add some data
+        user_key = new Buffer(username).toString('hex');
+        obj[username] = user_key;
         json = JSON.stringify(obj); //convert it back to json
 
         await fs.writeFile(fname, json, 'utf8');
     } else{
           obj = {};
-          obj[username] = random(0,10); //add some data
-          user_key = obj[username];
+          user_key = new Buffer(username).toString('hex');
+          obj[username] = user_key;
           json = JSON.stringify(obj); //convert it back to json
 
           await fs.writeFile(fname, json, 'utf8');
