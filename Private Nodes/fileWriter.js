@@ -38,15 +38,16 @@ function random(low, high) {
   return Math.random() * (high - low) + low
 }
 
-async function writer_username(domain, username, password){
+async function writer_username(domain, username, password , userdef_key){
     //domain.file1
     //Username :  ID
 
     let user_key = 0;
     let keys = [];
+    let hex_userdef_key = new Buffer(userdef_key).toString('hex');
     createFolder();
     let fname = './.usernames/' + domain.concat(".username"); //change 'username'
-
+    
     let exists = await fs.exists(fname);
 
     if(exists) {
@@ -83,20 +84,20 @@ async function writer_username(domain, username, password){
     if(exists) {
       data = await fs.readFile(fname2, 'utf8');
       obj = JSON.parse(data); //now it an object
-      console.log("dgs" + user_key);
+      console.log("dgs : " + user_key);
       if(user_key in keys){
-        console.log("  qwertyui"+keys)
+        console.log("  qwertyui : "+keys)
       }
-      obj[user_key] = password;
+      obj[user_key] = [password, userdef_key, hex_userdef_key];
       json = JSON.stringify(obj); //convert it back to json
       await fs.writeFile(fname2, json, 'utf8');
     } else{
           obj = {};
-          obj[user_key] = password; //add some data
+          obj[user_key] = [password, userdef_key, hex_userdef_key]; //add some data
         json = JSON.stringify(obj); //convert it back to json
         await fs.writeFile(fname2, json, 'utf8');
       }
 }
 
 module.exports = { writer_username };
-writer_username('facebook', 'nandini', 'password');
+writer_username('facebook', 'nandini', 'password', 'userdef_key');
