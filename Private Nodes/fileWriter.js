@@ -88,12 +88,12 @@ async function writer_username(domain, username, password , userdef_key){
       if(user_key in keys){
         console.log("  qwertyui : "+keys)
       }
-      obj[user_key] = [password, userdef_key, hex_userdef_key];
+      obj[user_key] = {"password" : password, "partial_userdef_key" : userdef_key, "userdef_key_hash" : hex_userdef_key};
       json = JSON.stringify(obj); //convert it back to json
       await fs.writeFile(fname2, json, 'utf8');
     } else{
           obj = {};
-          obj[user_key] = [password, userdef_key, hex_userdef_key]; //add some data
+          obj[user_key] = {"password" : password, "partial_userdef_key" : userdef_key, "userdef_key_hash" : hex_userdef_key}; //add some data
         json = JSON.stringify(obj); //convert it back to json
         await fs.writeFile(fname2, json, 'utf8');
       }
